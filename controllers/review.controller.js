@@ -24,11 +24,13 @@ module.exports.reviewController = {
     patchReview: (req, res) => {
         Review.find({
             bookId: req.params.id
-        }).then((data) => {
+        })
+        .populate('Book')
+        .then((data) => {
             res.json(data)
         })
         .catch((err) => {
             res.json('Error.Please, try again!')
-        })
-    }
+        });
+    },
 }

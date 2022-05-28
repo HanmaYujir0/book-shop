@@ -34,7 +34,10 @@ module.exports.bookController = {
         })
     },
     getBookById: (req, res) => {
-        Book.findById(req.params.id).then((data) => {
+        Book.findById(req.params.id)
+        .populate("Genre")
+        .populate("Author")
+        .then((data) => {
             res.json(data)
         })
             .catch((err) => {
@@ -42,7 +45,10 @@ module.exports.bookController = {
             })
     },
     getBook: (req, res) => {
-        Book.find().then((data) => {
+        Book.find()
+        .populate("Genre")
+        .populate("Author")
+        .then((data) => {
             res.json(data)
         })
             .catch((err) => {
@@ -50,7 +56,10 @@ module.exports.bookController = {
             })
     },
     getBookByGenre: (req, res) => {
-        Book.find({ genre: req.params.id }).then((data) => {
+        Book.find({ genre: req.params.id })
+        .populate("Genre")
+        .populate("Author")
+        .then((data) => {
             res.json(data)
         })
             .catch((err) => {
